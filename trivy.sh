@@ -55,3 +55,15 @@ stage("Trivy Scan") {
 - Uses --no-progress to disable the progress bar, reducing the clutter in the output logs.
 - Use this if you prefer running Trivy as a Docker container and want a more detailed output in a table format.
 - This is useful if you do not have Trivy installed on the Jenkins agent and you want to ensure the pipeline does not fail due to vulnerabilities, instead focusing on logging and reporting.
+
+### Use trivy clean --java-db in your Jenkins pipeline to update the database more frequently
+- To use trivy clean --java-db in your Jenkins pipeline to update the database more frequently, you can add a stage before your Trivy scan stages to perform this update.
+- This command updates Trivy's database, ensuring that your scans are using the most recent vulnerability data, which is particularly useful for Java applications.
+
+stage('Update Trivy DB') {
+            steps {
+                sh "trivy clean --java-db"
+            }
+        }
+
+
