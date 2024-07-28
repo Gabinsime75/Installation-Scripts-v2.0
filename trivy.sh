@@ -62,7 +62,7 @@ stage("Trivy Scan") {
 
 stage('Update Trivy DB') {
             steps {
-                sh "trivy clean --java-db"
+                sh "trivy --download-java-db"
             }
         }
 
