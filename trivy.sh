@@ -6,6 +6,20 @@ echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main |
 sudo apt-get update -y
 sudo apt-get install trivy -y
 
+
+### Trivy File Scan
+stage('TRIVY FS SCAN') {
+            steps {
+                sh "trivy fs . > trivyfs.txt"
+            }
+        }
+- sh "trivy fs . > trivyfs.txt": This line runs a shell command to execute a Trivy filesystem scan
+    * trivy fs: This command runs Trivy in filesystem scan mode, which scans the local filesystem for vulnerabilities.
+    * .: The dot (.) specifies the current directory as the target for the scan. Trivy will recursively scan all files and directories starting from the current directory.
+    * > trivyfs.txt: This part redirects the output of the Trivy scan to a file named trivyfs.txt. This file will contain the results of the scan.
+
+
+### Trivy Image Scan
 ## Groovy snippet for Jenkins pipeline
 # Snippet 1
 stage("Trivy Image Scan") {
